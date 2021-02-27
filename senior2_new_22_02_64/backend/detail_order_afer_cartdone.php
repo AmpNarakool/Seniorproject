@@ -138,7 +138,7 @@ $totalRows_cartdone = mysql_num_rows($cartdone);
         //echo $status;
       if($status > 1) {?>
         <?php if($status==5){ }else{?>
-            <h3> แจ้งสถานะอาหาร </h3>
+            <h3> อัพเดทสถานะอาหาร </h3>
               <form id="form1" name="form1" method="post" action="food_status.php">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                   <tr>

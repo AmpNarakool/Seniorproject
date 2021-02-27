@@ -108,11 +108,12 @@ form.search button:hover {
   <div class="col-md-10">
   <br>
         <a href="index.php" class="btn btn-primary"> รายการใหม่ </a>
-        <a href="index.php?act=show-dpayed" class="btn btn-info"> ชำระเงินสด </a>
-        <a href="index.php?act=show-payed" class="btn btn-info"> ชำระเงินแล้ว </a>
-        <a href="index.php?act=show-prepare" class="btn btn-warning"> กำลังเตรียมอาหาร </a>
+        <a href="index.php?act=show-dpayed" class="btn btn-success"> ชำระเงินสด </a>
+        <a href="index.php?act=show-payed" class="btn btn-success"> ชำระเงินแล้ว </a>
+        <a href="index.php?act=show-prepare" class="btn btn-success"> กำลังเตรียมอาหาร </a>
         <a href="index.php?act=show-delivery" class="btn btn-success"> กำลังจัดส่งอาหาร </a>
-        <a href="index.php?act=show-course" class="btn btn-danger"> สถานะคอร์สอาหาร </a>
+        <a href="index.php?act=show-successdelivery" class="btn btn-success"> จัดส่งสำเร็จแล้ว </a>
+        <a href="index.php?act=show-course" class="btn btn-success"> สถานะคอร์สอาหาร </a>
 
         <br> <br>
     
@@ -129,6 +130,8 @@ form.search button:hover {
                 include('show_cart_prepare.php');//สถานะเตรียมอาหาร
               }elseif($act=='show-delivery'){
                 include('show_cart_delivery.php');//สถานะจัดส่งอาหาร
+              }elseif($act=='show-successdelivery'){
+                include('show_cart_successdelivery.php');//จัดส่งสำเร็จแล้ว
               }elseif($act=='show-course'){
                 include('show-course.php');//คอร์สอาหาร
               }else{
