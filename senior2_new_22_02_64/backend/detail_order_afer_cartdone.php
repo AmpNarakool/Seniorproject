@@ -108,9 +108,8 @@ $index = 0
         <td colspan="4" align="center">รวม</td>
         <td align="center"><b> <?php echo number_format($total,2);?></b></td>
     </tr>
-
-    <tr>
-    <tr colspan="5">
+    <?php if($status > 1):?>
+        <tr colspan="5">
         <td>
             <?php if($status == 2 || $status == 3) : ?>
             <h3> อัพเดทสถานะอาหาร</h3>
@@ -188,7 +187,4 @@ $index = 0
             <?php endif; ?>
         </td>
     </tr>
-    <?php
-    mysql_free_result($buyer);
-    mysql_free_result($cartdone);
-?>
+    <?php endif ?>
