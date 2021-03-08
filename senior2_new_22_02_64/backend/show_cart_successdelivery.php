@@ -51,7 +51,7 @@ o.order_id as oid, o.mem_id, o.order_status, o.order_date, o.name,
 d.order_id , COUNT(d.order_id) as coid, SUM(d.total) as ctotal
 FROM orders  as o, order_detail as d 
 WHERE o.order_id=d.order_id
-AND o.order_status=4
+AND o.order_status=6
 GROUP BY o.order_id
 ORDER BY o.order_id DESC", GetSQLValueString($colname_mycart, "int"));
 $mycart = mysql_query($query_mycart, $condb) or die(mysql_error());

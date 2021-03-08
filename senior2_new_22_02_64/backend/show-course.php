@@ -1,59 +1,14 @@
 <?php // require_once('../Connections/condb.php'); ?>
 <?php
-if (!function_exists("GetSQLValueString")) {
-function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "") 
-{
-  if (PHP_VERSION < 6) {
-    $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
-  }
-
-  $theValue = function_exists("mysql_real_escape_string") ? mysql_real_escape_string($theValue) : mysql_escape_string($theValue);
-
-  switch ($theType) {
-    case "text":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;    
-    case "long":
-    case "int":
-      $theValue = ($theValue != "") ? intval($theValue) : "NULL";
-      break;
-    case "double":
-      $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
-      break;
-    case "date":
-      $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
-      break;
-    case "defined":
-      $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
-      break;
-  }
-  return $theValue;
-}
-}
-
-
 $colname_mm = "-1";
 if (isset($_SESSION['MM_Username'])) {
   $colname_mm = $_SESSION['MM_Username'];
 }
-mysql_select_db($database_condb, $condb);
-$query_mm = sprintf("SELECT * FROM tbl_member WHERE mem_username = %s", GetSQLValueString($colname_mm, "text"));
-$mm = mysql_query($query_mm, $condb) or die(mysql_error());
-$row_mm = mysql_fetch_assoc($mm);
-$totalRows_mm = mysql_num_rows($mm);
-
-$mem_id = $row_mm['mem_id'];
 
 mysql_select_db($database_condb, $condb);
-$query_mycart = sprintf("
-SELECT 
-o.order_id as oid, o.mem_id, o.order_status, o.order_date, o.name,
-d.order_id , COUNT(d.order_id) as coid, SUM(d.total) as ctotal
-FROM orders  as o, order_detail as d 
-WHERE o.order_id=d.order_id
-AND o.order_status=5
-GROUP BY o.order_id
-ORDER BY o.order_id DESC", GetSQLValueString($colname_mycart, "int"));
+
+$query_mycart = sprintf("SELECT c.c_id as cid, c.mem_id, c.mem_id AS coid, c.order_date, c.name, d.cd_id, c.pay_amount as total, c.course_status FROM course as c, course_detail as d WHERE c.c_order=d.cd_id ORDER BY c.order_date");
+
 $mycart = mysql_query($query_mycart, $condb) or die(mysql_error());
 $row_mycart = mysql_fetch_assoc($mycart);
 $totalRows_mycart = mysql_num_rows($mycart);
@@ -78,8 +33,8 @@ $totalRows_mycart = mysql_num_rows($mycart);
     <tr>
       <td>
       
-	  <?php echo $row_mycart['oid']; ?>
-      <a href="index.php?order_id=<?php echo $row_mycart['oid']; ?>&m=<?php echo $row_mycart['order_status']; ?>&act=show-order" target="_blank">
+	  <?php echo $row_mycart['cid']; ?>
+      <a href="index.php?course_id=<?php echo $row_mycart['cid']; ?>&act=show-detail-course" target="_blank">
       <span class="glyphicon glyphicon-zoom-in"></span>
       </a>
       </td>
@@ -87,32 +42,23 @@ $totalRows_mycart = mysql_num_rows($mycart);
       <?php echo $row_mycart['name'];?>
       </td>
       <td align="center">
-      <?php echo $row_mycart['coid'];?>
+      <?php echo 1?>
       </td>
        <td align="center">
-      <?php echo number_format($row_mycart['ctotal'],2);?>
+      <?php echo number_format($row_mycart['total'],2);?>
       </td>
       <td align="center">
       <font color="red">
       <?php 
-	  $status =  $row_mycart['order_status'];
-	  include('status.php');
-	  
+	  $status =  $row_mycart['course_status'];
+	  include('status_course.php');
 	  ?>  
       </font>
-      
-      
       </td>
       <td><?php echo $row_mycart['order_date']; ?></td>
     </tr>
     <?php } while ($row_mycart = mysql_fetch_assoc($mycart)); ?>
     <?php } ?>
 </table>
-
-<?php
-mysql_free_result($mycart);
-
-mysql_free_result($mm);
-?>
 
 

@@ -19,5 +19,9 @@ if($status==1){
 		echo "<font color='green'>";
 		echo "กำลังไปส่งอาหาร";
 		echo "</font>";
+	}elseif($status==6){
+		echo "<font color='green'>";
+		echo "จัดส่งสำเร็จ";
+		echo "</font>";
 	} 
 ?>

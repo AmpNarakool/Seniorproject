@@ -2,6 +2,7 @@
 # FileName="Connection_php_mysql.htm"
 # Type="MYSQL"
 # HTTP="true"
+error_reporting(0);
 $hostname_condb = "localhost";
 $database_condb = "senior2_1";
 $username_condb = "root";
