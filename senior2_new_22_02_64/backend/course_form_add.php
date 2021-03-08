@@ -16,7 +16,13 @@ extract($row_menu);
       ประจำสัปดาห์ที่ :
     </div>
     <div class="col-sm-5">
-      <input type="datetime-local" name="cd_weekly" required class="form-control">
+      <input type="datetime-local" name="start_weekly" required class="form-control">
+    </div>
+    <div class="col-sm-2 control-label">
+      ประจำสัปดาห์ที่ :
+    </div>
+    <div class="col-sm-5">
+      <input type="datetime-local" name="stop_weekly" required class="form-control">
     </div>
   </div>
 <!--วันจันทร์-->

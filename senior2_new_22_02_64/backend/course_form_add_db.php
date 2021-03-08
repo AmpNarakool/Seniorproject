@@ -2,10 +2,8 @@
 <?php
 require_once('../Connections/condb.php');
 
-	$cd_id = $_POST["cd_id"];
-	$m_id =  $_POST["m_id"];
-	$c_id =  $_POST["c_id"];
-	$cd_weekly = $_POST["cd_weekly"];
+	$start_weekly = $_POST["start_weekly"];
+	$stop_weekly = $_POST["stop_weekly"];
 	$meal_1 = $_POST["meal_1"];
 	$meal_2 = $_POST["meal_2"];
 	$meal_3 = $_POST["meal_3"];
@@ -39,9 +37,8 @@ require_once('../Connections/condb.php');
 	$sql = "INSERT INTO course_detail
 	(
 
-	m_id,
-	cd_weekly,
-	
+	date_start,
+	date_end,	
 	meal_1,
 	meal_2,
 	meal_3,
@@ -56,8 +53,8 @@ require_once('../Connections/condb.php');
 	VALUES
 	(
 
-	'$m_id',
-	'$cd_weekly',
+	'$start_weekly',
+	'$stop_weekly',
 	'$meal_1',
 	'$meal_2',
 	'$meal_3',
