@@ -1,10 +1,11 @@
 <?php
-$query = "SELECT * FROM course_detail as c  
-          LEFT JOIN menu as m
-          ON c.m_id = m.m_id
-          ORDER BY c.cd_id DESC" or die("Error:" . mysql_error());
+$query = "SELECT * FROM course_detail ORDER BY cd_id DESC" or die("Error:" . mysql_error());
 
 $result = mysql_db_query($database_condb, $query);
+$row = mysql_fetch_array($result);
+$totalRows = mysql_num_rows($result);
+$index = 0;
+
 echo ' <table id="example1" class="table table-bordered table-striped">';
   echo "<thead>";
     echo "<tr class='danger'>
@@ -15,10 +16,10 @@ echo ' <table id="example1" class="table table-bordered table-striped">';
       <th width='3%'>ลบ</th>
     </tr>";
   echo "</thead>";
-  while($row = mysql_fetch_array($result)) {
+  while($index<$totalRows) {
   echo "<tr>";
     echo "<td align='center'>" .$i +=1 .  "</td> ";
-    echo "<td>".$row["cd_weekly"]."</td> ";
+    echo "<td>".$row["date_start"]." ถึง ".$row["date_end"]."</td> ";
     echo "<td>"."วันจันทร์"."<br>"."มื้อที่1: ".$row["meal_1"]."<br>"."มื้อที่2: ".$row["meal_1_1"]."<br>"
               ."วันอังคาร"."<br>"."มื้อที่1: ".$row["meal_2"]."<br>"."มื้อที่2: ".$row["meal_2_2"]."<br>"
               ."วันพุธ"."<br>"."มื้อที่1: ".$row["meal_3"]."<br>"."มื้อที่2: ".$row["meal_3_3"]."<br>"
@@ -29,6 +30,7 @@ echo ' <table id="example1" class="table table-bordered table-striped">';
     </td> ";
     echo "<td><a href='course_del_db.php?ID=$row[0]' onclick=\"return confirm('คุณต้องการลบบันทึกนี้? !!!')\" class='btn btn-danger btn-xs'>ลบ</a></td> ";
   echo "</tr>";
+  $index +=1;
   }
 echo "</table>";
 ?>
